@@ -4,9 +4,10 @@ import {Metadata} from "next";
 import Image from "next/image";
 import {notFound} from "next/navigation";
 interface Props {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }
-export async function generateMetadata ({params}: PokemonProps):Promise<Metadata> {
+export async function generateMetadata(props: PokemonProps):Promise<Metadata> {
+    const params = await props.params;
     try {
         const {id, name} = await getPokemon(params.id)
         return {
@@ -20,7 +21,6 @@ export async function generateMetadata ({params}: PokemonProps):Promise<Metadata
             description: 'Pokemon not found',
         }
     }
-
 }
 const getPokemon = async (id: string): Promise<Pokemon> => {
     try {
@@ -34,7 +34,8 @@ const getPokemon = async (id: string): Promise<Pokemon> => {
 
 }
 
-export default async function PokemonPage({ params }: Props) {
+export default async function PokemonPage(props: Props) {
+    const params = await props.params;
 
     const pokemon = await getPokemon(params.id);
 
@@ -49,8 +50,10 @@ export default async function PokemonPage({ params }: Props) {
                     <div className="flex flex-col justify-center items-center">
                         <Image
                             src={pokemon.sprites.other?.dream_world.front_default ?? ''}
-                            width={150}
-                            height={150}
+                            width={0}
+                            height={0}
+                            priority={true}
+                            style={{ width: 'auto', height: '150px' }}
                             alt={`Imagen del pokemon ${pokemon.name}`}
                             className="mb-5"
                         />
