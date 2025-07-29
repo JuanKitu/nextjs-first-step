@@ -13,10 +13,11 @@ export function PokemonCard({pokemon}:SimplePokemonProps) {
                     <Image
                         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
                         alt={name}
-                        width={100}
+                        width={0}
+                        height={0}
+                        style={{ width: 'auto', height: '100px' }}
                         priority={false}
-                        key={id}
-                        height={100} />
+                        key={id}/>
                     <p className="pt-2 text-lg font-semibold text-gray-50 capitalize">{pokemon.name}</p>
                     <div className="mt-5">
                         <Link

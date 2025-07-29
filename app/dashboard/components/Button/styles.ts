@@ -1,11 +1,11 @@
 import { StyleButton, VariantButton, ButtonSize } from './Button.interface';
-import { colorTokens, borderRadius, typography, transitions } from '../../styles/tokens';
+import { borderRadius, typography, transitions } from '../../styles/tokens';
 
-export const widthStyles: Record<'auto' | 'short' | 'default' | 'full', string> = {
-    auto: '', // Se ajusta automáticamente al contenido
-    short: 'w-20', // Botón más corto
-    default: 'w-36', // Botón estándar
-    full: 'w-full' // Botón que ocupa el ancho completo del contenedor
+export const widthStyles = {
+    auto: '',
+    short: 'w-20',
+    default: 'w-36',
+    full: 'w-full',
 };
 
 export const sizeStyles: Record<ButtonSize, string> = {
@@ -13,24 +13,8 @@ export const sizeStyles: Record<ButtonSize, string> = {
     sm: 'px-3 py-1.5 text-sm',
     md: 'px-5 py-2.5 text-sm',
     lg: 'px-6 py-3 text-base',
-    xl: 'px-8 py-4 text-lg'
+    xl: 'px-8 py-4 text-lg',
 };
-
-export const iconSizes: Record<ButtonSize, string> = {
-    xs: 'text-xs',
-    sm: 'text-sm',
-    md: 'text-sm',
-    lg: 'text-base',
-    xl: 'text-lg'
-};
-
-const sizes = {
-    xs: 'px-2 py-1 text-xs',
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-5 py-2.5 text-sm',
-    lg: 'px-6 py-3 text-base',
-    xl: 'px-8 py-4 text-lg'
-} as const;
 
 export const baseStyle = [
     'inline-flex',
@@ -38,64 +22,39 @@ export const baseStyle = [
     'justify-center',
     typography.weight.medium,
     borderRadius.lg,
-    sizes.md, // Tamaño por defecto
     'focus:outline-none',
     'focus:ring-4',
     'mb-2',
     'me-2',
     'text-center',
-    transitions.default
+    transitions.default,
 ].join(' ');
 
+export const disabledStyle = 'opacity-50 pointer-events-none cursor-not-allowed';
 
-const createVariantStyles = (color: keyof typeof colorTokens) => {
-    const token = colorTokens[color];
+const solid = {
+    primary: 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-200',
+    secondary: 'text-white bg-gray-600 hover:bg-gray-700 focus:ring-gray-200',
+    success: 'text-white bg-green-600 hover:bg-green-700 focus:ring-green-200',
+    danger: 'text-white bg-red-600 hover:bg-red-700 focus:ring-red-200',
+    warning: 'text-gray-900 bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-200',
+    dark: 'text-white bg-gray-800 hover:bg-gray-900 focus:ring-gray-200',
+    light: 'text-gray-900 bg-gray-200 hover:bg-gray-300 focus:ring-gray-100',
+    purple: 'text-white bg-purple-600 hover:bg-purple-700 focus:ring-purple-200',
+};
 
-    return {
-        solid: `
-      text-${token.text}
-      bg-${token.base}-${token.shade.main}
-      hover:bg-${token.base}-${token.shade.dark}
-      focus:ring-${token.base}-${token.shade.focus}
-      dark:bg-${token.base}-${token.shade.light}
-      dark:hover:bg-${token.base}-${token.shade.main}
-    `.replace(/\s+/g, ' ').trim(),
-
-        outline: `
-      text-${token.base}-${token.shade.main}
-      border
-      border-${token.base}-${token.shade.main}
-      hover:bg-${token.base}-${token.shade.main}
-      hover:text-${token.text}
-      focus:ring-${token.base}-${token.shade.focus}
-      dark:border-${token.base}-${token.shade.light}
-      dark:text-${token.base}-${token.shade.light}
-      dark:hover:bg-${token.base}-${token.shade.light}
-    `.replace(/\s+/g, ' ').trim()
-    };
+const outline = {
+    primary: 'text-blue-600 border border-blue-600 hover:bg-blue-600 hover:text-white focus:ring-blue-200',
+    secondary: 'text-gray-600 border border-gray-600 hover:bg-gray-600 hover:text-white focus:ring-gray-200',
+    success: 'text-green-600 border border-green-600 hover:bg-green-600 hover:text-white focus:ring-green-200',
+    danger: 'text-red-600 border border-red-600 hover:bg-red-600 hover:text-white focus:ring-red-200',
+    warning: 'text-yellow-600 border border-yellow-600 hover:bg-yellow-500 hover:text-gray-900 focus:ring-yellow-200',
+    dark: 'text-gray-800 border border-gray-800 hover:bg-gray-800 hover:text-white focus:ring-gray-200',
+    light: 'text-gray-800 border border-gray-200 hover:bg-gray-200 hover:text-gray-900 focus:ring-gray-100',
+    purple: 'text-purple-600 border border-purple-600 hover:bg-purple-600 hover:text-white focus:ring-purple-200',
 };
 
 export const buttonStyles: Record<StyleButton, Record<VariantButton, string>> = {
-    solid: {
-        primary: createVariantStyles('primary').solid,
-        secondary: createVariantStyles('secondary').solid,
-        success: createVariantStyles('success').solid,
-        danger: createVariantStyles('danger').solid,
-        warning: createVariantStyles('warning').solid,
-        dark: createVariantStyles('dark').solid,
-        light: createVariantStyles('light').solid,
-        purple: createVariantStyles('purple').solid,
-    },
-    outline: {
-        primary: createVariantStyles('primary').outline,
-        secondary: createVariantStyles('secondary').outline,
-        success: createVariantStyles('success').outline,
-        danger: createVariantStyles('danger').outline,
-        warning: createVariantStyles('warning').outline,
-        dark: createVariantStyles('dark').outline,
-        light: createVariantStyles('light').outline,
-        purple: createVariantStyles('purple').outline,
-    }
+    solid,
+    outline,
 };
-
-export const disabledStyle = 'opacity-50 pointer-events-none cursor-not-allowed';
