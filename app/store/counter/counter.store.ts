@@ -1,30 +1,31 @@
 import {type StateCreator} from "zustand/vanilla";
 import {create} from "zustand";
-import {devtools} from "zustand/middleware/devtools";
-import {persist} from "zustand/middleware/persist";
+import { devtools, persist } from "zustand/middleware";
 
 interface CounterState {
     count: number;
     isReady: boolean;
 }
 interface CounterActions {
-    increment: () => void;
-    decrement: () => void;
-    //reset: () => void;
+    setIncrement: (value:number) => void;
+    setDecrement: (value:number) => void;
+    resetCount: (value: number) => void;
+
 }
 export type CounterStore = CounterState & CounterActions;
 const storeAPI: StateCreator<CounterStore> =(set, get) => ({
     count: 0,
     isReady: false,
-    increment: () => set(state => ({count: state.count + 1})),
-    decrement: () => set(state => {
-        const valueCount = get().count;
+    setIncrement: (value) => set(state => ({count: state.count + value})),
+    setDecrement: (value) => set(state => {
+        const valueCount = get().count - value;
         if(valueCount > 0){
-            return {count: state.count - 1}
+            return {count: state.count - value}
         } else {
             return {count: 0}
         }
     }),
+    resetCount: (value) => set({count: value})
 });
 
 export const useCounterStore = create<CounterStore>()(

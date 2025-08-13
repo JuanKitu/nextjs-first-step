@@ -1,17 +1,20 @@
 'use client';
-import React from 'react'
+import {useEffect} from 'react'
 import {Button} from "@/app/components";
 import {IoAddCircle, IoRemoveCircle} from "react-icons/io5";
-import {useState} from "react";
 import {CartCounterProps} from "@/app/shopping-cart/components/CartCounter.interface";
+import {useCounterStore} from "@/app/store";
 
 export function CartCounter({value}:CartCounterProps) {
-    const [counter, setCounter] = useState(value ?? 5);
-    const reduceCounter = () => {
-        if(counter > 0) {
-            setCounter(counter - 1)
+    const counter = useCounterStore(state => state.count);
+    const setIncrement = useCounterStore(state => state.setIncrement);
+    const setDecrement = useCounterStore(state => state.setDecrement);
+    // Inicializar solo cuando value cambie
+    useEffect(() => {
+        if (value != null) {
+            setIncrement(value);
         }
-    }
+    }, [value, setIncrement]);
     return (
         <>
             <span className="text-9xl">{counter}</span>
@@ -20,7 +23,7 @@ export function CartCounter({value}:CartCounterProps) {
                     size="md"
                     variant="success"
                     icon={<IoAddCircle />}
-                    onClick={() => setCounter(counter + 1)}
+                    onClick={()=> setIncrement(1)}
                 >
                     1
                 </Button>
@@ -28,7 +31,7 @@ export function CartCounter({value}:CartCounterProps) {
                     size="md"
                     variant="success"
                     icon={<IoRemoveCircle />}
-                    onClick={reduceCounter}
+                    onClick={()=> setDecrement(1)}
                 >
                     1
                 </Button>

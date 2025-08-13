@@ -1,2 +1,3 @@
 export { Sidebar } from './Sidebar';
-export { Button } from '@/app/components/Button/Button';
+export { Button } from './Button/Button';
+export { SimpleWidget } from './SimpleWidget';
