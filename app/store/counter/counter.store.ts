@@ -10,7 +10,7 @@ interface CounterActions {
     setIncrement: (value:number) => void;
     setDecrement: (value:number) => void;
     resetCount: (value: number) => void;
-
+    initCounterState: (value: number) => void;
 }
 export type CounterStore = CounterState & CounterActions;
 const storeAPI: StateCreator<CounterStore> =(set, get) => ({
@@ -25,7 +25,14 @@ const storeAPI: StateCreator<CounterStore> =(set, get) => ({
             return {count: 0}
         }
     }),
-    resetCount: (value) => set({count: value})
+    resetCount: (value) => set({count: value}),
+    initCounterState: (value) => set(()=> {
+        const isReady = get().isReady;
+        if(!isReady){
+            return {count: value, isReady: true};
+        }
+        return {count: get().count};
+    })
 });
 
 export const useCounterStore = create<CounterStore>()(

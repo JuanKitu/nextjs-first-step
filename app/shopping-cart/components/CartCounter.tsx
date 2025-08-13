@@ -9,12 +9,11 @@ export function CartCounter({value}:CartCounterProps) {
     const counter = useCounterStore(state => state.count);
     const setIncrement = useCounterStore(state => state.setIncrement);
     const setDecrement = useCounterStore(state => state.setDecrement);
+    const initCounterState = useCounterStore(state => state.initCounterState);
     // Inicializar solo cuando value cambie
     useEffect(() => {
-        if (value != null) {
-            setIncrement(value);
-        }
-    }, [value, setIncrement]);
+        initCounterState(value ?? 0);
+    }, [initCounterState, value]);
     return (
         <>
             <span className="text-9xl">{counter}</span>
