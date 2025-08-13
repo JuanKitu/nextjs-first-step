@@ -1,6 +1,9 @@
-import React from 'react'
 import {SimpleWidget} from "@/app/components";
-
+import {Metadata} from "next";
+export const metadata: Metadata = {
+    title: 'Admin Dashboard',
+    description: 'SEO Title',
+}
 export default function MainPage() {
     return (
         <div className="text-black p-2">
