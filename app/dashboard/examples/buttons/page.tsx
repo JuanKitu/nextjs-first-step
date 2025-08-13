@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaCheck, FaArrowRight, FaSpinner } from 'react-icons/fa';
-import { Button } from "@/app/dashboard/components/Button/Button";
+import { Button } from "@/app/components/Button/Button";
 
 export default function CounterPage() {
     return (

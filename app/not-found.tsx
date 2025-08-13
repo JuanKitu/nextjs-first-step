@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import {Sidebar} from "@/app/dashboard/components";
+import {Sidebar} from "@/app/components";
 import React from "react";
 
 export default function NotFound() {

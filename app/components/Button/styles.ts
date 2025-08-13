@@ -1,5 +1,5 @@
 import { StyleButton, VariantButton, ButtonSize } from './Button.interface';
-import { borderRadius, typography, transitions } from '../../styles/tokens';
+import { borderRadius, typography, transitions } from '../../dashboard/styles/tokens';
 
 export const widthStyles = {
     auto: '',

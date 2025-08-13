@@ -1,5 +1,5 @@
 'use client'
-import {ISidebarItemMenu} from "@/app/dashboard/components/interfaces/components.interfaces";
+import {ISidebarItemMenu} from "@/app/components/interfaces/components.interfaces";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 

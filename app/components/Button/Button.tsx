@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
-import { Spinner } from '../Spinner/Spinner';
+import { Spinner } from '@/app/components/Spinner/Spinner';
 import { ButtonProps } from './Button.interface';
 import { baseStyle, buttonStyles, disabledStyle, sizeStyles, widthStyles } from './styles';
 import React from 'react';

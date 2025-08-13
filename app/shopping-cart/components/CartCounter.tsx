@@ -1,6 +1,6 @@
 'use client';
 import React from 'react'
-import {Button} from "@/app/dashboard/components";
+import {Button} from "@/app/components";
 import {IoAddCircle, IoRemoveCircle} from "react-icons/io5";
 import {useState} from "react";
 import {CartCounterProps} from "@/app/shopping-cart/components/CartCounter.interface";

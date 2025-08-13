@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from "next/image";
-import {IoBrowsersOutline, IoCalculator} from "react-icons/io5";
-import {ISidebarItemMenu} from "./interfaces/components.interfaces";
+import {IoBrowsersOutline, IoCalculator, IoHeartOutline} from "react-icons/io5";
+import {ISidebarItemMenu} from "@/app/components/interfaces/components.interfaces";
 import {SidebarMenuItem} from "./SidebarMenuItem";
 import { MdCatchingPokemon } from 'react-icons/md'
 
@@ -23,6 +23,12 @@ const menuItems: ISidebarItemMenu[] = [
         icon: <MdCatchingPokemon size={40} />,
         title: 'Pokemones',
         subTitle: 'Pokedex'
+    },
+    {
+        path: '/dashboard/favorites',
+        icon: <IoHeartOutline size={40} />,
+        title: 'Favoritos',
+        subTitle: 'Global state'
     },
 ]
 export function Sidebar() {
