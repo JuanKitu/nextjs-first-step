@@ -1,11 +1,14 @@
-import React from 'react'
+"use client"
 import Link from "next/link";
 import Image from "next/image";
-import {IoHeartOutline} from "react-icons/io5";
+import {IoHeart, IoHeartOutline} from "react-icons/io5";
 import {SimplePokemonProps} from "@/app/pokemons";
+import {usePokemonStore} from "@/app/store";
 
 export function PokemonCard({pokemon}:SimplePokemonProps) {
     const {id, name} = pokemon;
+    const isFavorite = usePokemonStore(state => !!state.pokemons[id]);
+    console.log(isFavorite);
     return (
         <div className="mx-auto right-0 mt-2 w-60">
             <div className="flex flex-col rounded overflow-hidden shadow-lg">
@@ -31,7 +34,9 @@ export function PokemonCard({pokemon}:SimplePokemonProps) {
                 <div className="border-b">
                     <Link href="/dashboard/main" className="px-4 py-2 hover:bg-gray-100 flex items-center">
                             <div className="text-red-600">
-                                <IoHeartOutline />
+                                {
+                                    isFavorite ? <IoHeart /> : <IoHeartOutline />
+                                }
                             </div>
                             <div className="pl-3">
                                 <p className="text-sm font-medium text-gray-800 leading-none">
