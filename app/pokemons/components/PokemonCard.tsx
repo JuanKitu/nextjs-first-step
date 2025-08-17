@@ -8,6 +8,7 @@ import {usePokemonStore} from "@/app/store";
 export function PokemonCard({pokemon}:SimplePokemonProps) {
     const {id, name} = pokemon;
     const isFavorite = usePokemonStore(state => !!state.pokemons[id]);
+    const toggleFavorite = usePokemonStore(state => state.toggleFavorite);
     console.log(isFavorite);
     return (
         <div className="mx-auto right-0 mt-2 w-60">
@@ -32,7 +33,8 @@ export function PokemonCard({pokemon}:SimplePokemonProps) {
                     </div>
                 </div>
                 <div className="border-b">
-                    <Link href="/dashboard/main" className="px-4 py-2 hover:bg-gray-100 flex items-center">
+                    <div onClick={() => toggleFavorite(pokemon)}
+                        className="px-4 py-2 hover:bg-gray-100 flex items-center cursor-pointer">
                             <div className="text-red-600">
                                 {
                                     isFavorite ? <IoHeart /> : <IoHeartOutline />
@@ -44,7 +46,7 @@ export function PokemonCard({pokemon}:SimplePokemonProps) {
                                 </p>
                                 <p className="text-xs text-gray-500">View your campaigns</p>
                             </div>
-                    </Link>
+                    </div>
                 </div>
             </div>
         </div>
