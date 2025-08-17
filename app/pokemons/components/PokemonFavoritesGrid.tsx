@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import React, {useState} from 'react'
 import {PokemonCard} from "./PokemonCard";
 import {usePokemonStore} from "@/app/store";
